@@ -6,17 +6,17 @@ import jwt from 'express-jwt';
 
 // env
 dotenv.config();
-const key: string = process.env.SECRET! + new Date().getUTCHours().toString();
-const usertoken: string = process.env.USERTOKEN!;
 
+const key: string = process.env.SECRET!;
+const usertoken: string = process.env.USERTOKEN!;
 
 // Router
 const router = Router();
 
 router.use(
-    jwt({ secret: key, algorithms: ['HS256'] }),
+	jwt({ secret: key, algorithms: ['HS256'] }),
 	(req: any, res: any, next: any) => {
-
+		
         console.log(req.headers)
         console.log(req.user)
 
