@@ -8,11 +8,8 @@ import jwt from 'express-jwt';
 dotenv.config();
 const key: string = process.env.SECRET! + new Date().getUTCHours().toString();
 const usertoken: string = process.env.USERTOKEN!;
-const cryptoKey: string = process.env.CRYPTOKEY!;
 
 
-// Decrypt
-console.log(key);
 // Router
 const router = Router();
 
@@ -25,7 +22,7 @@ router.use(
 
 		// if (!req.user.admin && req.user.user !== usertoken) {
 		if (!req.user.admin && req.user.user !== usertoken) {
-			res.status(403).send('Forbidden :)');
+			res.status(401).send('Unauthorized');
 		}
 
 		next();
@@ -50,8 +47,6 @@ router.get('/que', (req: any, res: any) => {
 
 
 router.get('/test', (req: any, res: any) => {
-
-
     res.json({
         res: 'hola, que tal'
     });
