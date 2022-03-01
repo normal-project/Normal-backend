@@ -14,17 +14,8 @@ const usertoken: string = process.env.USERTOKEN!;
 const router = Router();
 
 router.get('/', (req: any, res: any) => {
-        res.json({
-            user: 'Autorizado pero en xd',
-            reason: 'hola :)'
-        })
+        res.status(200).send('Rutas disponibles:\n>/moderation/warn')
 })
 
-router.post('/', (req: any, res: any) => {
-    res.json({
-        user: 'Me has devuelto ' + req.body.user,
-        reason: 'El título es ' + req.body.reason
-    })
-})
 
 export default router;
