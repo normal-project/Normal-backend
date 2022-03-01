@@ -2,8 +2,10 @@
 import express from 'express';
 import dotenv from 'dotenv';
 
+// routes
 import index from './router/index';
 import xd from './router/xd';
+import moderation from './router/moderation/moderation';
 
 
 // server
@@ -23,6 +25,8 @@ app.use(express.json());
 // routes
 app.use('/', index);
 app.use('/xd', xd);
+app.use('/moderation', moderation);
+app.use('/moderation/<', moderation);
 
 
 // init
