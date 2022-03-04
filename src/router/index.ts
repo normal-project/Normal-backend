@@ -16,7 +16,6 @@ const router = Router();
 router.use(
 	jwt({ secret: key, algorithms: ['HS256'] }),
 	(req: any, res: any, next: any) => {
-		// if (!req.user.admin && req.user.user !== usertoken) {
 		if (!req.user.admin && req.user.user !== usertoken) {
 			res.status(401).send('Unauthorized');
 		}
@@ -27,10 +26,7 @@ router.use(
 
 
 router.get('/', (req: any, res: any) => {
-	res.json({
-		name: 'Hola',
-		title: 'Buscas algo?'
-	});
+	res.send('hola, buscas algo?')
 });
 
 

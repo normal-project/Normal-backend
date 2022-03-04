@@ -3,5 +3,5 @@ src.old/
 .env
 
 dist/
-
+ignoreFolder/
 src/router/xd.ts

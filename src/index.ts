@@ -1,11 +1,12 @@
 // libs
 import express from 'express';
-import dotenv from 'dotenv';
+import init from './db/init';
 
 // routes
 import index from './router/index';
-import xd from './router/xd';
-import moderation from './router/moderation/moderation';
+import xd from './router/test'; // test
+import server from './router/server/server';
+import admin from './router/admin/admin';
 
 
 // server
@@ -24,12 +25,15 @@ app.use(express.json());
 
 // routes
 app.use('/', index);
-app.use('/xd', xd);
-app.use('/moderation', moderation);
-app.use('/moderation/<', moderation);
+app.use('/xd', xd); // test
+app.use('/server', server)
+app.use('/admin', admin)
 
 
-// init
+// init db
+init();
+
+// server
 app.listen(app.get('port'), () => {
     console.log(`\nServer en el puerto ${app.get('port')}\n--------------------------`)
 })
