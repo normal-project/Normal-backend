@@ -16,17 +16,21 @@ const router = Router();
 router.use(
 	jwt({ secret: key, algorithms: ['HS256'] }),
 	(req: any, res: any, next: any) => {
+
+		const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
 		if (!req.user.admin && req.user.user !== usertoken) {
 			res.status(401).send('Unauthorized');
-		}
 
-		next();
+		} else {
+			next();
+		}
 	}
 );
 
 
 router.get('/', (req: any, res: any) => {
 	res.send('hola, buscas algo?')
+	
 });
 
 

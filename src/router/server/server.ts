@@ -28,16 +28,13 @@ router.get('/:serverId', async (req: any, res: any) => {
 // Crear datos de un server
 router.post('/create', (req: any, res: any) => {
 	const newServer = new server({
-		id: req.body.serverId,
-		suggest: {
-			enabled: false,
-			channelId: 'null'
-		}
+		id: req.body.serverId
 	});
 
 	newServer.save();
 	res.send('Server nuevo registrado');
 });
+
 
 router.use('/suggest', suggest)
 
