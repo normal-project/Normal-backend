@@ -1,22 +1,23 @@
 // Libs
-import { Router } from 'express';
 import { server } from '../../db/models/server';
+import { Router, Request, Response } from 'express';
 
 // routes
 import suggest from './suggest';
+import automod from './automod';
 
 
 // Router
 const router = Router(); // { mergeParams: true } sirve para fusionar los datos de la ruta padre y la ruta hijo
 
-router.get('/', (req: any, res: any) => {
+router.get('/', (req: Request, res: Response) => {
 	res.status(300).send(`Tienes muchas rutas disponibles`)
 });
 
 
 // obtener datos de server
-router.get('/:serverId', async (req: any, res: any) => {
-	const data: any = await server.findOne({ id: req.params.serverId });
+router.get('/:serverId', async (req: Request, res: Response) => {
+	const data: any = await server.findOne({ serverId: req.params.serverId });
 
 	if(data){
 		res.json(data);
@@ -26,16 +27,19 @@ router.get('/:serverId', async (req: any, res: any) => {
 });
 
 // Crear datos de un server
-router.post('/create', (req: any, res: any) => {
+router.post('/create', async (req: Request, res: Response) => {
+	console.log(req.body);
 	const newServer = new server({
-		id: req.body.serverId
+		serverId: req.body.serverId
 	});
 
-	newServer.save();
+	await newServer.save();
+
 	res.send('Server nuevo registrado');
 });
 
 
-router.use('/suggest', suggest)
+router.use('/suggest', suggest);
+router.use('/automod', automod);
 
 export default router;

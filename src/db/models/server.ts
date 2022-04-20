@@ -2,7 +2,7 @@ import { Schema, model, Document } from 'mongoose';
 
 // El esquema está en Figma
 interface IServer extends Document {
-	id: string, // OBLIGATORIO para reconocer el server
+	serverId: string, // OBLIGATORIO para reconocer el server
 
 	// SISTEMA DE SUGERENCIAS
 	suggest: {
@@ -10,19 +10,23 @@ interface IServer extends Document {
 		channelId: string,
 		suggestions: [{
 			msgId: string,
-			date: Date,
-			status: string,
+			suggest: string,
 			voters: {
 				upvote: string[],
 				downvote: string[]
 			}
 		}]
+	},
+
+	// SISTEMA DE MODERACIÓN
+	moderation: {
+		automod: boolean
 	}
 }
 
 
 const schema = new Schema<IServer>({
-	id: { type: String, required: true },
+	serverId: String,
 
 	// SISTEMA DE SUGERENCIAS
 	suggest: {
@@ -31,13 +35,16 @@ const schema = new Schema<IServer>({
 		suggestions: [{
 			msgId: String,
 			suggest: String,
-			date: Date,
-			status: String, // o es "emited" o "approved" o "denied"
 			voters: {
 				upvote: [String],
 				downvote: [String]
 			}
 		}]
+	},
+
+	// SISTEMA DE MODERACIÓN
+	moderation: {
+		automod: String
 	}
 });
 

@@ -3,12 +3,12 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-export default function init() {
+export default async function init() {
 
     const uri = process.env.MONGO_URI;
     const db = mongoose.connection;
 
-    mongoose.connect( uri! , () => {
+    await mongoose.connect( uri! , () => {
         return {
             useNewUrlParser: true,
             useUnifiedTopology: true,
