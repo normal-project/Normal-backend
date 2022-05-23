@@ -44,7 +44,10 @@ const schema = new Schema<IServer>({
 
 	// SISTEMA DE MODERACIÓN
 	moderation: {
-		automod: String
+		automod: {
+			type: Boolean,
+			index: true
+		}
 	}
 });
 

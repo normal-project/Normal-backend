@@ -22,7 +22,12 @@ router.get('/:serverId', async (req: Request, res: Response) => {
 	if(data){
 		res.json(data);
 	} else {
-		res.status(404).send('No se ha encontrado ese server')
+		res.status(404).json(
+			{
+				status: 'error',
+				message: 'server no encontrado'
+			}
+		)
 	}
 });
 

@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import { connect, connection } from 'mongoose';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -6,9 +6,9 @@ dotenv.config();
 export default async function init() {
 
     const uri = process.env.MONGO_URI;
-    const db = mongoose.connection;
+    const db = connection;
 
-    await mongoose.connect( uri! , () => {
+    connect( uri! , () => {
         return {
             useNewUrlParser: true,
             useUnifiedTopology: true,

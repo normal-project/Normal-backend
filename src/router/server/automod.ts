@@ -13,14 +13,14 @@ router.get('/', (req: Request, res: Response) => {
 /**************************************/
 
 
-// Retornar valores de suggest
+// Retornar valores de automod
 // RECIBO: ID (URL)
 router.get('/:serverId', async (req: Request, res: Response) => {
 	const data: any = await server.findOne({ serverId: req.params.serverId });
 
 	if (data) {
 		res.json({
-			suggest: data.suggest
+			automod: data.moderation.automod
 		});
 	} else {
 		res.status(404).json({
@@ -35,7 +35,7 @@ router.get('/:serverId', async (req: Request, res: Response) => {
 
 
 // activar canal
-// RECIBO: ID (URL) y nuevo canal (body)
+// RECIBO: ID (URL)
 router.post('/:serverId', async (req: Request, res: Response) => {
 	const data: any = await server.findOneAndUpdate(
 		{ serverId: req.params.serverId },
@@ -49,8 +49,7 @@ router.post('/:serverId', async (req: Request, res: Response) => {
 
 	if (data) {
 		res.json({
-			enabled: true,
-			channelId: req.body.channelId
+			enabled: true
 		});
 	} else {
 		res.status(404).json({

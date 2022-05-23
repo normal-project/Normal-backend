@@ -1,6 +1,5 @@
 // init db
 import init from './db/init';
-init();
 
 // libs
 import express from 'express';
@@ -31,6 +30,7 @@ app.use('/xd', xd); // test
 app.use('/server', server)
 app.use('/admin', admin)
 
+init();
 
 
 // server
